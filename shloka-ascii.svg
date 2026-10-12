@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 570" width="100%" height="100%">
+  <defs>
+    <style>
+      @keyframes rowReveal {
+        0% {
+          opacity: 0;
+          transform: translateY(-2px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes cursorBlink {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0; }
+      }
+      .term-card {
+        fill: #0d1117;
+        stroke: #30363d;
+        stroke-width: 1.2;
+        rx: 12px;
+      }
+      .term-topbar {
+        fill: #161b22;
+      }
+      .term-heading {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Fira Code", monospace;
+        font-size: 12px;
+        fill: #8b949e;
+        font-weight: 500;
+      }
+      .prompt-text {
+        font-family: "SF Mono", "Fira Code", Menlo, Monaco, Consolas, monospace;
+        font-size: 12px;
+        fill: #58a6ff;
+        font-weight: 600;
+      }
+      .prompt-cmd {
+        fill: #7ee787;
+        font-weight: 400;
+      }
+      .ascii-text {
+        font-family: "SF Mono", "Fira Code", "Courier New", monospace;
+        font-size: 10.2px;
+        fill: #79c0ff;
+        letter-spacing: 0px;
+        white-space: pre;
+      }
+      .ascii-line {
+        opacity: 0;
+        animation: rowReveal 0.05s ease-out forwards;
+      }
+      .status-text {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Fira Code", monospace;
+        font-size: 10.5px;
+        fill: #8b949e;
+      }
+      .cursor-blink {
+        animation: cursorBlink 1s infinite;
+      }
+    </style>
+  </defs>
+
+  <!-- Card Background -->
+  <rect x="1" y="1" width="538" height="568" class="term-card" />
+
+  <!-- Window Header -->
+  <path d="M 1 13 Q 1 1 13 1 L 527 1 Q 539 1 539 13 L 539 36 L 1 36 Z" class="term-topbar" />
+  <line x1="1" y1="36" x2="539" y2="36" stroke="#30363d" stroke-width="1" />
+
+  <!-- Window Buttons -->
+  <circle cx="20" cy="19" r="5.5" fill="#ff5f56" />
+  <circle cx="36" cy="19" r="5.5" fill="#ffbd2e" />
+  <circle cx="52" cy="19" r="5.5" fill="#27c93f" />
+
+  <!-- Terminal Window Title -->
+  <text x="270.0" y="23" text-anchor="middle" class="term-heading">shloka@macbook-air: ~ (ascii-portrait)</text>
+
+  <!-- Prompt Command -->
+  <text x="24" y="62" class="prompt-text">shloka@github:~$ <tspan class="prompt-cmd">./render_ascii.sh --animate</tspan></text>
+
+  <!-- Animated ASCII Art Rows -->
+  <g class="ascii-line" style="animation-delay: 0.045s;"><text x="24" y="96.0" class="ascii-text">                                                              </text></g><g class="ascii-line" style="animation-delay: 0.09s;"><text x="24" y="108.2" class="ascii-text">                                                              </text></g><g class="ascii-line" style="animation-delay: 0.135s;"><text x="24" y="120.4" class="ascii-text">                                                              </text></g><g class="ascii-line" style="animation-delay: 0.18s;"><text x="24" y="132.6" class="ascii-text">                                                              </text></g><g class="ascii-line" style="animation-delay: 0.225s;"><text x="24" y="144.8" class="ascii-text">                                                              </text></g><g class="ascii-line" style="animation-delay: 0.27s;"><text x="24" y="157.0" class="ascii-text">                                                              </text></g><g class="ascii-line" style="animation-delay: 0.315s;"><text x="24" y="169.2" class="ascii-text">                                                              </text></g><g class="ascii-line" style="animation-delay: 0.36s;"><text x="24" y="181.4" class="ascii-text">                                                              </text></g><g class="ascii-line" style="animation-delay: 0.405s;"><text x="24" y="193.6" class="ascii-text">                                                              </text></g><g class="ascii-line" style="animation-delay: 0.45s;"><text x="24" y="205.8" class="ascii-text">                                                              </text></g><g class="ascii-line" style="animation-delay: 0.495s;"><text x="24" y="218.0" class="ascii-text">                    .....                                     </text></g><g class="ascii-line" style="animation-delay: 0.54s;"><text x="24" y="230.2" class="ascii-text">                  :@:...c-                                    </text></g><g class="ascii-line" style="animation-delay: 0.585s;"><text x="24" y="242.4" class="ascii-text">                   +c    c=                                   </text></g><g class="ascii-line" style="animation-delay: 0.63s;"><text x="24" y="254.6" class="ascii-text">                    s*    *+       .s-.:=.                    </text></g><g class="ascii-line" style="animation-delay: 0.675s;"><text x="24" y="266.8" class="ascii-text">                     %=    *c       .+   *=                   </text></g><g class="ascii-line" style="animation-delay: 0.72s;"><text x="24" y="279.0" class="ascii-text">                      @:    =*    ..:+#c-::                   </text></g><g class="ascii-line" style="animation-delay: 0.765s;"><text x="24" y="291.2" class="ascii-text">                      .@:  .:##==+-:.  =+                     </text></g><g class="ascii-line" style="animation-delay: 0.81s;"><text x="24" y="303.4" class="ascii-text">                       :s++=:.=%        -#.                   </text></g><g class="ascii-line" style="animation-delay: 0.855s;"><text x="24" y="315.6" class="ascii-text">                               -%   .-+*++.                   </text></g><g class="ascii-line" style="animation-delay: 0.9s;"><text x="24" y="327.8" class="ascii-text">                                -#**=:.                       </text></g><g class="ascii-line" style="animation-delay: 0.945s;"><text x="24" y="340.0" class="ascii-text">                                                              </text></g><g class="ascii-line" style="animation-delay: 0.99s;"><text x="24" y="352.2" class="ascii-text">                                                              </text></g><g class="ascii-line" style="animation-delay: 1.035s;"><text x="24" y="364.4" class="ascii-text">              ::::--.-:::::::=.-..::.:::.::-:::               </text></g><g class="ascii-line" style="animation-delay: 1.08s;"><text x="24" y="376.6" class="ascii-text">                  .          .                                </text></g><g class="ascii-line" style="animation-delay: 1.125s;"><text x="24" y="388.8" class="ascii-text">                                                              </text></g><g class="ascii-line" style="animation-delay: 1.17s;"><text x="24" y="401.0" class="ascii-text">                                                              </text></g><g class="ascii-line" style="animation-delay: 1.215s;"><text x="24" y="413.2" class="ascii-text">                                                              </text></g><g class="ascii-line" style="animation-delay: 1.26s;"><text x="24" y="425.4" class="ascii-text">                                                              </text></g><g class="ascii-line" style="animation-delay: 1.305s;"><text x="24" y="437.6" class="ascii-text">                                                              </text></g><g class="ascii-line" style="animation-delay: 1.35s;"><text x="24" y="449.8" class="ascii-text">                                                              </text></g><g class="ascii-line" style="animation-delay: 1.395s;"><text x="24" y="462.0" class="ascii-text">                                                              </text></g><g class="ascii-line" style="animation-delay: 1.44s;"><text x="24" y="474.2" class="ascii-text">                                                              </text></g><g class="ascii-line" style="animation-delay: 1.485s;"><text x="24" y="486.4" class="ascii-text">                                                              </text></g><g class="ascii-line" style="animation-delay: 1.53s;"><text x="24" y="498.6" class="ascii-text">                                                              </text></g>
+
+  <!-- Footer Status Bar -->
+  <g transform="translate(24, 552)">
+    <circle cx="4" cy="-4" r="3" fill="#39d353" />
+    <text x="14" y="0" class="status-text">MONOCHROME VECTOR ART · AUTO-TYPING ENGINE</text>
+    <rect x="480" y="-10" width="8" height="12" fill="#58a6ff" class="cursor-blink" />
+  </g>
+</svg>
