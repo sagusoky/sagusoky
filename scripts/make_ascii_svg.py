@@ -18,12 +18,18 @@ SOURCE_RAW = os.path.join(PROJECT_ROOT, "avatar.png")
 OUT_PATH = os.path.join(PROJECT_ROOT, "shloka-ascii.svg")
 
 # Density ramp: sparse (blank/dark background) to dense (bright highlights)
-RAMP = "   ..::-=+*cs#%@"
+RAMP = "   ..::--=+*#%@"
 
 
 def get_image():
-    from PIL import Image, ImageOps
+    from PIL import Image
+    # If source-prepped exists, use it; otherwise run prep_photo on source-photo.png
     if os.path.exists(SOURCE_PREPPED):
+        return Image.open(SOURCE_PREPPED).convert("L")
+    elif os.path.exists(SOURCE_PHOTO):
+        import subprocess
+        prep_script = os.path.join(SCRIPT_DIR, "prep_photo.py")
+        subprocess.run([sys.executable, prep_script, SOURCE_PHOTO], check=True)
         return Image.open(SOURCE_PREPPED).convert("L")
     elif os.path.exists(SOURCE_RAW):
         import subprocess
@@ -35,47 +41,24 @@ def get_image():
         sys.exit(1)
 
 
-def generate_ascii_grid(img, cols=62, rows=34):
-    from PIL import Image, ImageOps
+def generate_ascii_grid(img, cols=68, rows=42):
+    from PIL import Image
 
-    # Detect bounding box to focus on the emblem/subject
-    bbox = img.getbbox()
-    if bbox:
-        # Add slight margin
-        w, h = img.size
-        pad_x = int((bbox[2] - bbox[0]) * 0.05)
-        pad_y = int((bbox[3] - bbox[1]) * 0.05)
-        x0 = max(0, bbox[0] - pad_x)
-        y0 = max(0, bbox[1] - pad_y)
-        x1 = min(w, bbox[2] + pad_x)
-        y1 = min(h, bbox[3] + pad_y)
-        cropped = img.crop((x0, y0, x1, y1))
-    else:
-        cropped = img
-
-    resized = cropped.resize((cols, rows), Image.Resampling.LANCZOS)
-
-    # Determine if background is dark or light
-    corner_pixels = [
-        resized.getpixel((0, 0)),
-        resized.getpixel((cols - 1, 0)),
-        resized.getpixel((0, rows - 1)),
-        resized.getpixel((cols - 1, rows - 1)),
-    ]
-    avg_corner = sum(corner_pixels) / len(corner_pixels)
-    is_dark_bg = avg_corner < 128
-
+    resized = img.resize((cols, rows), Image.Resampling.LANCZOS)
     grid = []
     ramp_len = len(RAMP)
     for y in range(rows):
         line_chars = []
         for x in range(cols):
             val = resized.getpixel((x, y))
-            # If dark bg, bright is dense; if light bg, dark is dense
-            score = val if is_dark_bg else (255 - val)
-            idx = int(score / 256.0 * ramp_len)
-            idx = max(0, min(ramp_len - 1, idx))
-            line_chars.append(RAMP[idx])
+            # Background suppression for dark pixels
+            if val < 42:
+                line_chars.append(" ")
+            else:
+                norm = (val - 42) / (255.0 - 42)
+                idx = int(norm * ramp_len)
+                idx = max(0, min(ramp_len - 1, idx))
+                line_chars.append(RAMP[idx])
         grid.append("".join(line_chars))
 
     return grid
@@ -85,13 +68,13 @@ def render_svg(grid):
     width = 540
     height = 570
 
-    line_start_y = 96
-    line_spacing = 12.2
-    char_size = 10.2
+    line_start_y = 88
+    line_spacing = 10.4
+    char_size = 9.0
 
     row_elements = []
     for idx, row in enumerate(grid):
-        delay = round(0.045 * (idx + 1), 3)
+        delay = round(0.035 * (idx + 1), 3)
         y_pos = line_start_y + idx * line_spacing
         escaped_row = html.escape(row)
         # Wrap each line with staggered reveal
